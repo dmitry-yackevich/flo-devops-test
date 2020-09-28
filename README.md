@@ -1,20 +1,15 @@
 # flo-devops-test
-Цель тестового — проверить знания terraform, ansible, docker и общее понимание архитектуры приложения.
 
-Нужно установить кластер из двух нод с wordpress в AWS, который сможет поддерживать около 100% аптайм. 
-Кластер должен быть доступен по test.wodpress.int и поддерживать zero downtime deployment.
+Goal — check the knowledge of common understanding of high-available application setup in AWS
+(using AWS cloud services and Terraform is a must; for deployment you can choose anything you want: helm (preferable), ansible, shell, etc).
 
-Сам вордпресс нужно упаковать в docker образ, можно использовать https://roots.io/bedrock/
-Кластер должен переживать падение любой из двух нод.
+You need
+- prepare docker image for Wordpress (you can base on https://roots.io/bedrock/ for example or smth else)
+- setup multiple wordpress instances in AWS, which provide 100% uptime. Wordpress cluster domain should be "test.wodpress.int" and support zero downtime deployment. Fail of any of node, don't lead to downtime.
 
-Задачи со звездочкой, для тех, кому слишком легко
-
-1*) Реализовать поддержку расспределенных attachments на базе AWS Elastic File System
-
-2*) Не терять реквесты при деплойменте. Использовать для этого возможности AWS ALB
-
-3*) Добавить SSL сертификат, чтобы сайт был доступен по https
-
-4*) Создать Docker Repository в AWS и деплоить образы через него
-
-К решению нужно приложить ADR с пояснением выбранной архитектуры и сервисов.
+*** Extra tasks if previous one easy for you :)
+1) Add support of sharing wordpress attachment files via AWS Elastic File System
+2) Don't loose open http connections during deployment. Prepare test scenario how you check it
+3) Add SSL certificates, to support https on your wordpress domain
+4) Create AWS ECR Docker Repository and deploy your custom wordpress image from this registry.
+Prepare ADR (Architecture decision record) and attach it to homework with an explanation of why you choose this architecture and toolset.
